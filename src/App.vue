@@ -1,31 +1,17 @@
 <template>
     <div class="app">
-        <form @submit.prevent>
-            <h4>Создание поста</h4>
-            <input v-bind:value="title"
-                   @input="inputTitle"
-                   class="input"
-                   type="text"
-                   placeholder="Название поста"
-            >
-            <input v-bind:value="body"
-                   @input="inputBody"
-                   class="input"
-                   type="text"
-                   placeholder="Описание поста"
-            >
-            <button class="btn" @click="createPost">Создать</button>
-        </form>
-        <div class="post" v-for="post in posts">
-            <div><strong>Название:</strong>{{post.title}}</div>
-            <div><strong>Описание:</strong>{{post.body}}</div>
-        </div>
+        <post-form/>
+        <post-list :posts="posts"/>
     </div>
 </template>
 
 <script>
+    import PostForm from "./Components/PostForm";
+    import PostList from "./Components/PostList";
+
     export default {
         name: "App.vue",
+        components: {PostList, PostForm},
         data() {
             return {
                 posts: [
@@ -33,24 +19,11 @@
                     {id: 1, title: 'JS-2', body: 'Описание поста-2'},
                     {id: 1, title: 'JS-3', body: 'Описание поста-3'},
                 ],
-                title: '',
-                body: ''
             }
         },
         methods: {
             createPost() {
-                const newPost = {
-                    id: Date.now(),
-                    title: this.title,
-                    body: this.body
-                }
-                this.posts.push(newPost)
-            },
-            inputTitle(event) {
-                this.title = event.target.value
-            },
-            inputBody(event) {
-                this.body = event.target.value
+
             }
         }
     }
@@ -67,29 +40,4 @@
         padding: 20px;
     }
 
-    form {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .post {
-        padding: 15px;
-        border: 2px solid darkcyan;
-        margin-top: 15px;
-    }
-
-    .input {
-        width: 100%;
-        border: 1px solid darkcyan;
-        padding: 10px 15px;
-        margin-top: 15px;
-    }
-
-    .btn {
-        align-self: flex-end;
-        margin-top: 15px;
-        padding: 10px 15px;
-        background: none;
-        border: 1px solid darkcyan;
-    }
 </style>
