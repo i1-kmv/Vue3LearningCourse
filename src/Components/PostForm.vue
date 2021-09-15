@@ -2,12 +2,14 @@
     <form @submit.prevent>
         <h4>Создание поста</h4>
         <my-input
-                v-model:value="post.title"
+                v-model="post.title"
                 placeholder="Название поста"
+                type="text"
         />
         <my-input
-                v-model:value="post.body"
+                v-model="post.body"
                 placeholder="Описание поста"
+                type="text"
         />
         <my-button
                 @click="createPost"
